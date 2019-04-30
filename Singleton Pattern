@@ -1,0 +1,89 @@
+/**********************************************First version - not thread-safe********************************************************/
+        public sealed class Singleton
+        {
+            private static Singleton instance = null;
+
+            private Singleton()
+            {
+            }
+
+            public static Singleton Instance
+            {
+                get
+                {
+                    if (instance == null)
+                    {
+                        instance = new Singleton();
+                    }
+                    return instance;
+                }
+            }
+        }
+        
+        /**********************************************thread-safe using lock********************************************************/
+        
+        public sealed class Singleton
+        {
+            private static Singleton instance = null;
+            private static readonly object padlock = new object();
+
+            Singleton()
+            {
+            }
+
+            public static Singleton Instance
+            {
+                get
+                {
+                    lock (padlock)
+                    {
+                        if (instance == null)
+                        {
+                            instance = new Singleton();
+                        }
+                        return instance;
+                    }
+                }
+            }
+        }
+        
+        /**********************************************thread-safe without lock********************************************************/
+        public sealed class Singleton
+        {
+            private static readonly Singleton instance = new Singleton();
+
+            // Explicit static constructor to tell C# compiler
+            // not to mark type as beforefieldinit
+            static Singleton()
+            {
+            }
+
+            private Singleton()
+            {
+            }
+
+            public static Singleton Instance
+            {
+                get
+                {
+                    return instance;
+                }
+            }
+        } 
+        /**********************************************thread-safe fully lazy instantiation********************************************************/
+         public sealed class Singleton
+        {
+            private static readonly Lazy<Singleton>
+                lazy =
+                new Lazy<Singleton>
+                    (() => new Singleton());
+
+            public static Singleton Instance { get { return lazy.Value; } }
+
+            private Singleton()
+            {
+            }
+        }
+        
+        
+        
