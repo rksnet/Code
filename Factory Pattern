@@ -1,0 +1,78 @@
+using System;
+using FactoryPattern.CardInterface;
+using FactoryPattern.Cards;
+
+namespace FactoryPattern
+{
+    namespace CardInterface
+    {
+        interface ICard
+        {
+           string GetCardInformation();
+        }
+    }
+
+    namespace Cards
+    {
+        class MoneyBackCard : ICard
+        {
+            public string GetCardInformation()
+            {
+               //Get the Information about MoneyBackCard
+                return "MoneyBack card gives you to explore more shopping!!!!";
+            }
+        }
+
+        class PlatinumkCard : ICard
+        {
+            public string GetCardInformation()
+            {
+                //Get the Information about MoneyBackCard
+                return "Platinum card gives you the special features of our company!!!!";
+            }
+        }
+    }
+
+    namespace CardFactory
+    {
+        class CardFactory
+        {
+            public static ICard GetCardInformation(string cardType)
+            {
+                ICard Card;
+                switch (cardType)
+                {
+                    case "MoneyBack":
+                        Card = new MoneyBackCard();
+                        break;
+                    case "Platinum":
+                        Card = new PlatinumkCard();
+                        break;
+                    default:
+                        Card = new MoneyBackCard();
+                        break;
+                }
+                return Card;
+            }
+        }
+    }
+}
+
+/**********************************Client*****************************************/
+namespace Client
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Here you can have either dropdown to load all the types and based on that can create the object
+            Console.WriteLine("Enter card type : ");
+            ICard CardType = CardFactory.GetCardInformation(Console.ReadLine().ToString());
+            Console.WriteLine(CardType.GetCardInformation());
+            Console.ReadKey();
+        }
+     }
+}
+        
+
+
