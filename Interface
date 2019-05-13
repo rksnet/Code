@@ -1,0 +1,109 @@
+Interface
+	Contract
+	Signature
+	Strandardization
+	Abstraction	
+	Decoupling
+	Enforce Rules
+	Versioning
+	Multiple Inheritance
+	
+
+Basic use of Interface is Contract
+
+In real world:
+	Customer  <====CONTRACT=====> Supplier
+
+In Programming
+	1. Code intracts to another Code
+	2. Component interacts to another Componenet
+
+	Example:
+		UI consumes MathComponent
+				Add, Subtract and so on
+		There is a implicit contract between 
+		caller and called code
+		UI calls Add method 
+
+	Irrespective you use interface or you do not use it.* 
+	There is always a contract between caller and calle
+	This will be saying WRONG, the contract is only possible by interface.**
+	Which is called implicit contract by calling method using the object of any other class object 
+
+
+Now the architeure decides the UI project should be decouple and no direct contract bewteen UI and Math.
+	Then situation would be UI ===> Factory ====> MyComponent
+				(Implicit Contract)
+
+
+
+	Interface is Explicit contract** to decupple the project.
+
+	UI => IMaths, Factory
+	Factory => IMaths, MathComponent
+	Factory => MathComponent
+	MathComponent => May be some other libraries
+		( => refrenced)
+
+
+** Interfaces should not be changed once your project is GO LIVE (Production).
+	if you want to change then create new interfaces.
+
+
+Abstraction:- Show only what is necessary.
+
+		IMaths
+			- IMathInterface
+			- IAdvancedMathInterface : IMathInterface
+		 So when UI has IMathInterface ref obj then get only those methods.
+		    when UI has IAdvMathInterface ref obj then get all those methods.
+
+ 
+
+**Multiple Inheritance is only when product is on production not while design. 
+
+
+				Use of Interface
+				================
+					|
+   	                             Contract
+					|
+			---------------------------------
+			| 		|		|
+		   Multiple 	 Abstraction	Enforcement
+		  Inheritance
+
+summary:
+	- Use an interface explicit contract where caller and calle are decoupled from each other . Impact analysis, change detection..Runtime we will have less problem.
+	- Abstraction
+	- Multiple inheritance ...Production
+	
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
